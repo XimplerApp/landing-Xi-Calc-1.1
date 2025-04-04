@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Ahorro | Ximpler.App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f9fafb;
+            padding: 40px;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            max-width: 760px;
+            margin: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+            border: 1px solid #e0e0e0;
+        }
+        h2 {
+            text-align: center;
+            color: #1e1e1e;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            color: #333;
+            font-weight: 600;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+        .help-text {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        button {
+            background: #00b894;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        button:hover {
+            background: #019875;
+        }
+        .result {
+            margin-top: 25px;
+            font-size: 16px;
+            color: #2d3436;
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 12px;
+        }
+        .mensaje-final {
+            margin-top: 40px;
+            background: #e8f5e9;
+            border-left: 5px solid #00b894;
+            padding: 20px;
+            border-radius: 12px;
+            color: #2e7d32;
+            font-size: 15px;
+        }
+        .mensaje-final h3 {
+            margin-top: 0;
+        }
+        .estudios {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #444;
+            background: #fdfdfd;
+            padding: 15px;
+            border-left: 4px solid #ccc;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de Ahorro<br>con Ximpler.App</h2>
+
+        <label for="empleados">Número de Personal Staff y Ejecutivo (con computadora o escritorio - No operadores de calle):</label>
+        <input type="number" id="empleados" min="1" value="20">
+
+        <label for="tiempo">Tiempo monetizable a recuperar (%):</label>
+        <select id="tiempo">
+            <option value="15">15% - Procesos y funciones con posibilidades de mejora para hacerlos más prácticos y eficientes</option>
+            <option value="20" selected>20% - Oportunidad de mejora en la ejecución, gestión y seguimiento entre colaboradores</option>
+            <option value="25">25% - Desorganización operativa, y fallos en la colaboración y comunicación interna</option>
+            <option value="30">30% - Procesos sustantivos de alto impacto o más importantes sin control</option>
+            <option value="35">35% - Fallos de comunicación entre dirección, mandos medios y operación, para ejecutar estrategias</option>
+        </select>
+        <div class="help-text">* Basado en estudios de McKinsey, Gallup y Harvard Business Review: entre 25% y 40% del tiempo laboral se pierde en reuniones improductivas, tareas duplicadas y falta de seguimiento.</div>
+
+        <label for="sueldo">Sueldo mensual promedio por empleado (MXN):</label>
+        <input type="text" id="sueldo" value="15,000" oninput="formatInput(this)">
+
+        <label for="sueldo_total">O ingrese el sueldo total mensual de todos los empleados (MXN):</label>
+        <input type="text" id="sueldo_total" placeholder="Opcional" oninput="formatInput(this)">
+
+        <button onclick="calcular()">Calcular Ahorro</button>
+
+        
+        <div class="result" id="resultado"></div>
+
+        <div style="margin-top: 10px;">
+            <span onclick="toggleInfo()" style="cursor:pointer; font-size: 16px; color: #00b894;">
+                ℹ️ ¿Cómo se calculan los puestos optimizables?
+            </span>
+            <div id="infoBox" style="display:none; margin-top: 10px; font-size: 14px; background: #f1f5f9; padding: 12px; border-radius: 10px;">
+                <strong>Fórmula:</strong><br>
+                <em>Personal optimizable = Número de Empleados × % de Tiempo Recuperado</em><br><br>
+                Esto representa la cantidad equivalente de personas que están actualmente subutilizadas en la operación. Aunque no necesariamente implica despido, sino que existe una oportunidad real de reorganizar, reasignar funciones, pero sí, incluso reducir el tamaño del equipo sin afectar los resultados, gracias a una mejor gestión del tiempo y reacomodo de la carga de trabajo.
+            </div>
+        </div>
+    
+
+        <div class="mensaje-final">
+            <h3>¿Qué tanto cuesta el desorden operativo?</h3>
+            <p>Hoy, muchos empleados desperdician o desaprovechan tiempo en rastrear la información en cientos de correos y mensajes de texto, en falta de seguimiento adecuado, tareas mal organizadas, sin prioridades claras ni plazos específicos, y muchas otras malas prácticas de colaboración y comunicación.</p>
+            <p>Sin embargo, para ellos no hay diferencia: su salario es fijo. Pero para la empresa, cada minuto improductivo es dinero perdido.</p>
+            <p>Con <strong>Ximpler.App</strong>, la empresa puede:</p>
+            <ul>
+                <li>Aprovechar el tiempo improductivo.</li>
+                <li>Identificar qué áreas y personas están generando más costo que valor.</li>
+                <li>Optimizar, automatizar y eliminar procesos ineficientes.</li>
+            </ul>
+            <p><strong>Ximpler simplifica la operación, para que tu empresa aproveche el tiempo.</strong></p>
+            <p><strong>Conclusión:</strong> Ximpler.App no es un gasto. Es una inversión en control, eficiencia y ahorro operativo. Porque el recurso más caro y más desperdiciado en su empresa es el tiempo humano.</p>
+            <p><strong>Solicita una demostración y diagnóstico a la medida, sin costo.</strong></p>
+        
+<div style="text-align: center; margin-top: 30px;">
+    <img src="data:image/png;base64,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" alt="QR WhatsApp MIAZ" width="130" height="130">
+</div>
+
+    </div>
+
+    <div class="estudios">
+            <strong>Soporte de datos:</strong><br>
+            ▸ <em>Harvard Business Review</em> reporta que más del 35% del tiempo en oficina se desperdicia por mala gestión.<br>
+            ▸ <em>Gallup</em> destaca que solo el 20% de los empleados se sienten altamente productivos diariamente.<br>
+            ▸ <em>McKinsey & Co.</em> estima que la automatización y digitalización pueden recuperar hasta un 30% del tiempo laboral.
+        </div>
+    </div>
+
+    <script>
+        function formatInput(input) {
+            let value = input.value.replace(/,/g, '').replace(/[^0-9]/g, '');
+            input.value = Number(value || 0).toLocaleString('es-MX');
+        }
+
+        function parseCurrency(value) {
+            return parseInt(value.replace(/[^0-9]/g, '')) || 0;
+        }
+
+        function calcular() {
+            const empleados = parseInt(document.getElementById('empleados').value);
+            const tiempo = parseInt(document.getElementById('tiempo').value) / 100;
+            const sueldo = parseCurrency(document.getElementById('sueldo').value);
+            const sueldo_total_input = document.getElementById('sueldo_total').value;
+            const sueldo_total = sueldo_total_input ? parseCurrency(sueldo_total_input) : (empleados * sueldo);
+
+            const personalOptimizable = Math.round(empleados * tiempo);
+            const ahorroMensual_por_reduccion = personalOptimizable * sueldo;
+            const ahorroAnual_por_reduccion = ahorroMensual_por_reduccion * 12;
+
+            const ahorroMensual_por_tiempo = Math.round(sueldo_total * tiempo);
+            const ahorroAnual_por_tiempo = ahorroMensual_por_tiempo * 12;
+
+            const resultado = `
+                <strong>Personal optimizable:</strong> ${personalOptimizable}<br><br>
+                <u>Ahorro por Optimización de la Capacidad Laboral Instalada (ajuste posible de personal, logrando atender los procesos actuales con mayor eficiencia sin sobrecargar al resto):</u><br>
+                - Ahorro mensual estimado: $${ahorroMensual_por_reduccion.toLocaleString()} MXN<br>
+                - Ahorro anual estimado: $${ahorroAnual_por_reduccion.toLocaleString()} MXN<br><br>
+                <u>Ahorro por mejor aprovechamiento del tiempo (involucramiento e información más rápido, menos tiempos muertos, más resultados entre el personal, ventas, cobranza efectiva, calidad de procesos, etc.):</u><br>
+                - Ahorro mensual estimado: $${ahorroMensual_por_tiempo.toLocaleString()} MXN<br>
+                - Ahorro anual estimado: $${ahorroAnual_por_tiempo.toLocaleString()} MXN
+            `;
+
+            document.getElementById('resultado').innerHTML = resultado;
+        }
+    
+        function toggleInfo() {
+            const infoBox = document.getElementById("infoBox");
+            infoBox.style.display = infoBox.style.display === "none" ? "block" : "none";
+        }
+    </script>
+    
+</body>
+</html>
